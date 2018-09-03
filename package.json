@@ -2,7 +2,7 @@
   "name": "emarsys-trial",
   "version": "1.0.0",
   "description": "A trial project",
-  "main": "calculatorShell.js",
+  "main": "main.js",
   "scripts": {
     "test": "jasmine ./src/spec.js"
   },
