@@ -13,7 +13,7 @@ module.exports = function createCalculator(deps) {
 	const dayEnd = deps.end;
 	const numOfHours = deps.hours;
 
-	function getDateParts(date) {
+	function getDateComponents(date) {
 		return {
 			year: date.getFullYear(),
 			month:  date.getMonth(),
@@ -69,11 +69,11 @@ module.exports = function createCalculator(deps) {
 			throw new Error("turnaround should be a number.");
 		}
 
-		const submitDate = getDateParts(submissionDate);
+		const submissionComponents = getDateComponents(submissionDate);
 		const dueDate = submissionDate;
 
-		if (turnaround + submitDate.hour < dayEnd) {
-			dueDate.setHours(submitDate.hour + turnaround);
+		if (turnaround + submissionComponents.hour < dayEnd) {
+			dueDate.setHours(submissionComponents.hour + turnaround);
 			return dueDate;
 		}
 
@@ -82,9 +82,9 @@ module.exports = function createCalculator(deps) {
 			hours: turnaround % numOfHours
 		};
 
-		checkOverlap(submitDate, turnAroundTimes);
+		checkOverlap(submissionComponents, turnAroundTimes);
 
-		dueDate.setDate(submitDate.day + turnAroundTimes.days);
+		dueDate.setDate(submissionComponents.day + turnAroundTimes.days);
 		dueDate.setHours(dayStart + turnAroundTimes.hours);
 
 		return dueDate;
