@@ -91,4 +91,4 @@ module.exports = function createCalculator(deps) {
 	}
 
 	return calculateDueDate;
-}
+};
