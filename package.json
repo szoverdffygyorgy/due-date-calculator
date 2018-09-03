@@ -4,7 +4,7 @@
   "description": "A trial project",
   "main": "calculatorShell.js",
   "scripts": {
-    "test": "npm test"
+    "test": "jasmine ./src/spec.js"
   },
   "author": "",
   "license": "ISC",
