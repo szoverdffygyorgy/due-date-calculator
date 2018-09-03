@@ -50,11 +50,27 @@ describe("Due Date Calculator tests", () => {
 			expect(() => {
 				calculator(new Date("Sun Sept 02 2018 14:20:17 GMT+0100 (CET)"));
 			}).toThrowError("Submission date should be on weekdays during working hours.");
+
+			expect(() => {
+				calculator(new Date("Sat Sept 01 2018 14:20:17 GMT+0100 (CET)"));
+			}).toThrowError("Submission date should be on weekdays during working hours.");
+
+			expect(() => {
+				calculator(new Date("Mon Sept 03 2018 17:20:17 GMT+0100 (CET)"));
+			}).toThrowError("Submission date should be on weekdays during working hours.");
+
+			expect(() => {
+				calculator(new Date("Mon Sept 03 2018 04:20:17 GMT+0100 (CET)"));
+			}).toThrowError("Submission date should be on weekdays during working hours.");
 		});
 
 		it("Invalid turnaround value", () => {
 			expect(() => {
 				calculator(new Date("Mon Sept 03 2018 14:20:17 GMT+0100 (CET)"), "Not a number");
+			}).toThrowError("turnaround should be a number.");
+
+			expect(() => {
+				calculator(new Date("Mon Sept 03 2018 14:20:17 GMT+0100 (CET)"), -1);
 			}).toThrowError("turnaround should be a number.");
 		});
 

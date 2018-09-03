@@ -24,16 +24,36 @@ module.exports = function createCalculator(deps) {
 		};
 	}
 
-	function checkOverlap(submit, turnaround) {
-		if (submit.hour + turnaround.hours >= dayEnd && submit.minute > 0) {
+	function validateSubmissionDate(date) {
+		if (date.getDay() === 6) {
+			return false;
+		}
+
+		if (date.getDay() === 0) {
+			return false;
+		}
+
+		if (date.getHours() < dayStart) {
+			return false;
+		}
+
+		if (date.getHours() > dayEnd) {
+			return false;
+		}
+
+		return true;
+	}
+
+	function checkOverlap(submission, turnaround) {
+		if (submission.hour + turnaround.hours >= dayEnd && submission.minute > 0) {
 			turnaround.days++;
 		}
 
-		if (submit.dayNum + turnaround.days > 5) {
+		if (submission.dayNum + turnaround.days > 5) {
 			turnaround.days += 2;
 		}
 
-		turnaround.hours = (turnaround.hours + submit.hour - dayStart) % numOfHours;
+		turnaround.hours = (turnaround.hours + submission.hour - dayStart) % numOfHours;
 	}
 
 	function calculateDueDate(submissionDate, turnaround) {
@@ -41,11 +61,11 @@ module.exports = function createCalculator(deps) {
 			throw new Error("Please provide a valid submission date.");
 		}
 
-		if (submissionDate.getDay() === 6 || submissionDate.getDay() === 0 || submissionDate.getHours() < dayStart || submissionDate.getHours() > dayEnd) {
+		if (!validateSubmissionDate(submissionDate)) {
 			throw new Error("Submission date should be on weekdays during working hours.");
 		}
 
-		if (typeof turnaround !== "number") {
+		if (typeof turnaround !== "number" || turnaround < 0) {
 			throw new Error("turnaround should be a number.");
 		}
 
