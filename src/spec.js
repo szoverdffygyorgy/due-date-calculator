@@ -4,8 +4,7 @@ const calculatorCore = require("./calculateDueDate");
 
 const dependencies = {
 	start: 9,
-	end: 17,
-	hours: 8
+	end: 17
 };
 
 let calculator;
