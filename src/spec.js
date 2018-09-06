@@ -25,6 +25,15 @@ describe("Due Date Calculator tests", () => {
 				});
 			}).toThrowError("end is a mandatory dependency.");
 		});
+		
+		it("invalid interval", () => {
+			expect(() => {
+				calculatorCore({
+					start: 14,
+					end: 11
+				});
+			}).toThrowError("Please provide valid workday interval.")
+		});
 	});
 
 	describe("Valid dependencies", () => {
