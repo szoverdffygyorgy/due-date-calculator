@@ -51,7 +51,7 @@ module.exports = function createCalculator(deps) {
 			days++;
 		}
 
-		if (submission.dayNum + turnaround.days > 5) {
+		if (submission.dayNum + days > 5) {
 			days += 2;
 		}
 
