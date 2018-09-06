@@ -26,15 +26,6 @@ describe("Due Date Calculator tests", () => {
 				});
 			}).toThrowError("end is a mandatory dependency.");
 		});
-
-		it("hours missing", () => {
-			expect(() => {
-				calculatorCore({
-					start: 0,
-					end: 0
-				});
-			}).toThrowError("hours is a mandatory dependency.");
-		});
 	});
 
 	describe("Valid dependencies", () => {
