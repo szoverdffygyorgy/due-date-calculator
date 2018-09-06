@@ -11,6 +11,11 @@ module.exports = function createCalculator(deps) {
 
 	const dayStart = deps.start;
 	const dayEnd = deps.end;
+	
+	if (dayStart >= dayEnd) {
+		throw new Error("Please provide valid workday interval.");
+	}
+	
 	const numOfHours = dayEnd - dayStart;
 
 	function getDateComponents(date) {
